@@ -1,0 +1,53 @@
+Input: Position, Set of aligned reads R, Consensus Threshold T​
+
+Output: Consensus sequence C​
+
+​
+C <- empty string​
+
+​
+function generateConsensus(position, alignedReads, Threshold):​
+
+    nucleotideCounts <- empty dictionary​
+
+​
+    for each read from alignedReads do:​
+
+        nucleotide <- nucleotide at position in read​
+
+        if nucleotide a gap then:​
+
+            if nucleotide not in nucleotideCounts then:​
+
+                nucleotideCounts[nucleotide] <- 1​
+
+            else:​
+
+                nucleotideCounts[nucleotide] <- nucleotideCounts[nucleotide] + 1​
+    consensusNucleotide <- nucleotide with maximum count in nucleotideCounts​
+
+    consensusCount <- count of consensusNucleotide​
+
+    totalAlignedReads <- total number of aligned reads​
+
+​
+    if consensusCount / totalAlignedReads >= Threshold do:​
+
+        C <- C + consensusNucleotide​
+
+    else:​
+
+        C <- C + "N"  // Indicating uncertainty in the consensus​
+
+​
+    if position < length of aligned reads do:​
+
+        nextAlignedReads <- subset of alignedReads with nucleotide at position​
+
+        generateConsensus(position + 1, nextAlignedReads)​
+
+​
+generateConsensus(0, R, T)​
+
+​
+return C​

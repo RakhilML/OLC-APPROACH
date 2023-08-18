@@ -1,0 +1,46 @@
+Input: Set of reads R, Set of overlap pairs O​
+
+Output: Layout of the reads L​
+
+​
+L <- empty list​
+
+​
+function constructLayout(read, layoutSoFar):​
+
+    Add read to layoutSoFar​
+
+    Remove read from remaining reads​
+
+    ​
+
+    if no outgoing overlaps from read then:​
+
+        Add layoutSoFar to L​
+
+        return​
+
+​
+    for each outgoing overlap pair (read, nextRead) from O do:​
+
+        constructLayout(nextRead, layoutSoFar + overlap sequence of nextRead)​
+
+function recursiveLayoutConstruction(R, O):​
+
+    for each read from R do:​
+
+        constructLayout(read, "")​
+
+​
+    return L​
+
+​
+// Call recursiveLayoutConstruction to obtain the layout​
+
+layout <- recursiveLayoutConstruction(R, O)​
+
+​
+return layout​
+
+​
+​

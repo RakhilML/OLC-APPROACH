@@ -1,0 +1,87 @@
+Input: Set of reads R     Output: Set of overlapping read pairs O​
+
+​
+O <- empty set            ​
+
+​
+function Overlap_pairs(R, min_overlap_len, min_overlap_score):​
+
+​
+for each read r1 <- R do:​
+
+    len_r1 <- length of r1​
+
+    overlap_found <- false​
+
+    ​
+
+    for each read r2 <- R do:, starting from the next position after r1 do:​
+
+        len_r2 <- length of r2​
+
+        ​
+
+        for i <- 0 to len_r1 - min_overlap_len do:​
+
+            suffix_r1 <- suffix of r1 starting from index i​
+
+            max_overlap_len <- minimum(length(suffix_r1), len_r2)​
+
+            ​
+
+            for j <- 0 to max_overlap_len – 1 do:​
+
+                prefix_r2 <- prefix of r2 up to length j + 1​
+
+                score <- calculateOverlapScore(suffix_r1, prefix_r2,)​
+ if score >= min_overlap_score then:​
+
+                    add (r1, r2) to O​
+
+                    overlap_found <- true​
+
+                    break​
+
+            ​
+
+            if overlap_found = true then:​
+
+                break​
+
+    ​
+
+    if overlap_found = false then:​
+
+        for each read r2 <- R do:, starting from the next position after r1 do:​
+
+            len_r2 <- length of r2​
+
+            revcomp_r2 <- reverse complement of r2​
+
+            ​
+
+            for i <- 0 to len_r1 - min_overlap_len do:​
+
+                suffix_r1 <- suffix of r1 starting from index i​
+
+                max_overlap_len <- minimum(length(suffix_r1), len(revcomp_r2))​
+
+     for j <- 0 to max_overlap_len – 1 do:​
+
+                    prefix_revcomp_r2 <- prefix of revcomp_r2 up to length j + 1​
+
+                    score <- calculateOverlapScore(suffix_r1, prefix_revcomp_r2)​
+
+                    ​
+
+                    if score >= min_overlap_score then:​
+
+                        add (r1, r2) to O​
+
+                        break​
+
+​
+return O​
+
+​
+​
