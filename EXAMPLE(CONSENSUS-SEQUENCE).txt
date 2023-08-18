@@ -1,0 +1,24 @@
+Example(consensus sequence)
+
+Assume the consensus threshold 𝑇 = 0.5.
+
+At position 0, we have ’A’ in all three reads. The count of ’A’ is 3, and the total number of aligned reads is 3.
+
+Therefore, 33 = 1.0, which meets the threshold condition. Thus, the consensus nucleotide at position 0 is ’A’.
+
+Moving to position 1, we have ’C’ in all three reads. Again, the count of ’C’ is 3, and the total number of aligned reads is 3. 
+Thus, the consensus nucleotide at position 1 is ’C’.
+
+At position 2, we have ’G’ in one read (𝑟1) and ’A’ in two reads (𝑟2 and 𝑟3). The count of ’G’ is 1, and the count of ’A’ is 2.
+The total number of aligned reads is 3. 
+Therefore, 23 = 0.67, which meets the threshold condition. 
+Thus, the consensus nucleotide at position 2 is ’A’.
+
+Finally, at position 3, we have ’T’ in two reads (𝑟2 and 𝑟3) and ’A’ in one read (𝑟1).
+The count of ’T’ is 2, and the count of ’A’ is 1. The total number of aligned reads is 3. 
+Therefore, 23 = 0.67, which meets the threshold condition. 
+Thus, the consensus nucleotide at position 3 is ’T’.
+Therefore, the consensus sequence would be ’ACAT’.
+
+These are the core algorithms in raven that works iteratively, with the layout construction step refining and improving the assembly based on the detected overlaps.
+The consensus generation step uses the final layout to generate a consensus sequence that represents the assembled genome.
